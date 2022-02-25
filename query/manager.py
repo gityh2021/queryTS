@@ -362,13 +362,8 @@ def query_consign(timeout: int = 1*hour):
 
 def query_auth(timeout: int = 1*hour):
     q = Query(url)
-
     query_weights = {
-        q.query_high_speed_ticket: 10,
-        q.query_high_speed_ticket_parallel: 10,
-        q.query_min_station: 10,
-        q.query_cheapest: 10,
-        q.query_quickest: 10,
+        q.login: 50,
     }
 
     def task():
@@ -439,7 +434,7 @@ def select_task(idx: int) -> Callable:
         16: query_execute,
         17: query_preserve,
         18: query_auth,
-        19: query_auth,
+        19: query_preserve,
         20: query_station,
         21: query_route,
         22: query_travel,
