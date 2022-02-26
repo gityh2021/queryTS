@@ -376,6 +376,12 @@ def query_auth(timeout: int = 1*hour):
 def query_execute(timeout: int = 1*hour):
     q = Query(url)
 
+    def pay_scenario():
+        query_and_pay(q)
+
+    def preserve_scenario():
+        query_and_preserve(q)
+
     def collect_scenario():
         query_and_collect(q)
 
@@ -383,6 +389,8 @@ def query_execute(timeout: int = 1*hour):
         query_and_execute(q)
 
     query_weights = {
+        preserve_scenario: 10,
+        pay_scenario: 10,
         collect_scenario: 10,
         execute_scenario: 10,
     }
